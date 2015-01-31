@@ -1,6 +1,6 @@
 {
 	"server": {
-		"port": 7000
+		"port": 7001
 	},
 	"database": {
 		"hostname": "127.0.0.1",

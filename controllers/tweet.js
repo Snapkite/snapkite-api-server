@@ -33,7 +33,6 @@ var getKeyword = function (keyword, numberOfTweets, callback) {
 };
 
 module.exports = {
-  save: save,
   getAll: getAll,
   getKeyword: getKeyword
 };
