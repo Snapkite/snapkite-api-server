@@ -2,6 +2,10 @@
 
 API server for [Snapkite](https://github.com/fedosejev/snapkite).
 
+## Dependencies
+
+* MongoDB
+
 ## Install
 
 1. `git clone https://github.com/fedosejev/snapkite-api-server.git`
