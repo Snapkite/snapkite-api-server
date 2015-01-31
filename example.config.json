@@ -1,0 +1,12 @@
+{
+	"server": {
+		"port": 7000
+	},
+	"database": {
+		"hostname": "127.0.0.1",
+		"port": "27017",
+		"username": "",
+		"password": "",
+		"name": "snapkite"
+	}
+}
