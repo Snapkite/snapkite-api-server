@@ -21,6 +21,8 @@ Snapkite API server is now listening to the port specified in a config file.
 
 ## API
 
+All requests are GET.
+
 #### `/api/1.0/tweets/all`
 
 Returns 10 latest tweets.
