@@ -1,9 +1,10 @@
 var Tweet = require('../models/Tweet');
 
-var getAll = function (numberOfTweets, callback) {
+var getAll = function (numberOfTweets, offset, callback) {
 
   Tweet
     .find()
+    .skip(offset)
     .sort({'id': -1})
     .limit(numberOfTweets)
     .exec(function (error, tweets) {
@@ -16,10 +17,11 @@ var getAll = function (numberOfTweets, callback) {
     });
 };
 
-var getKeyword = function (keyword, numberOfTweets, callback) {
+var getKeyword = function (keyword, numberOfTweets, offset, callback) {
 
   Tweet
     .find({'text': { '$regex': keyword, '$options': 'i'}})
+    .skip(offset)
     .sort({'id': -1})
     .limit(numberOfTweets)
     .exec(function (error, tweets) {

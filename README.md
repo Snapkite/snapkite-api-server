@@ -1,10 +1,11 @@
 # Snapkite API Server
 
-API server for [Snapkite](https://github.com/fedosejev/snapkite).
+API server for [Snapkite Engine](https://github.com/fedosejev/snapkite-engine).
 
 ## Dependencies
 
-* MongoDB
+* [Snapkite Engine](https://github.com/fedosejev/snapkite-engine).
+* MongoDB.
 
 ## Install
 
@@ -16,14 +17,36 @@ API server for [Snapkite](https://github.com/fedosejev/snapkite).
 
 `npm start`
 
-This should return you 10 latest tweets:
+Snapkite API server is now listening to the port specified in a config file.
 
-`http://localhost:7001/api/tweets/all/10`
+## API
 
-This should return you 10 latest tweets with a keyword `hello`:
+#### `/api/1.0/tweets/all`
 
-`http://localhost:7001/api/tweets/keyword/hello/10`
+Returns 10 latest tweets.
+
+#### `/api/1.0/tweets/all/:numberOfTweets`
+
+Returns `:numberOfTweets` latest tweets.
+
+#### `/api/1.0/tweets/all/:numberOfTweets/:offset`
+
+Skips `:offset` and returns `:numberOfTweets` latest tweets.
+
+#### `/api/1.0/tweets/keyword/:keyword`
+
+Returns 10 latest tweets with a keyword `:keyword`.
+
+#### `/api/1.0/tweets/keyword/:keyword/:numberOfTweets`
+
+Returns `:numberOfTweets` latest tweets with a keyword `:keyword`.
+
+#### `/api/1.0/tweets/keyword/:keyword/:numberOfTweets/:offset`
+
+Skips `:offset` and returns `:numberOfTweets` latest tweets with a keyword `:keyword`.
 
 ## License
 
-Released under the MIT license.
+Snapkite API Server is released under the MIT license.
+
+This software comes with NO WARRANTY, expressed or implied.
