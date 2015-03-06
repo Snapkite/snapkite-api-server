@@ -1,15 +1,15 @@
 # Snapkite API Server
 
-API server for [Snapkite Engine](https://github.com/fedosejev/snapkite-engine).
+API server for [Snapkite Engine](https://github.com/snapkite/snapkite-engine).
 
 ## Dependencies
 
-* [Snapkite Engine](https://github.com/fedosejev/snapkite-engine).
+* [Snapkite Engine](https://github.com/snapkite/snapkite-engine).
 * MongoDB.
 
 ## Install
 
-1. `git clone https://github.com/fedosejev/snapkite-api-server.git`
+1. `git clone https://github.com/snapkite/snapkite-api-server.git`
 2. `cd snapkite-api-server`
 3. `cp example.config.json config.json`
 
