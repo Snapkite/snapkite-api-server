@@ -19,8 +19,10 @@ var getAll = function (numberOfTweets, offset, callback) {
 
 var getKeyword = function (keyword, numberOfTweets, offset, callback) {
 
+  var regex = new RegExp('\\b' + keyword + '\\b', 'i');
+
   Tweet
-    .find({'text': { '$regex': keyword, '$options': 'i'}})
+    .find({'text': { '$regex': regex }})
     .skip(offset)
     .sort({'id': -1})
     .limit(numberOfTweets)
