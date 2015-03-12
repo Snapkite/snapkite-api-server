@@ -35,6 +35,23 @@ require('./controllers/database')(SNAPKITE_CONFIG.database);
 
 var router = express.Router();
 
+function handleGetTweet(req, res) {
+  var tweetId;
+
+  if (typeof req.params.tweetId !== 'undefined') {
+    tweetId = req.params.tweetId;
+  }
+
+  require('./controllers/tweet').get(tweetId, function (error, tweet) {
+    if (error) {
+      res.json(500);
+      return;
+    }
+
+    res.json(tweet);
+  });
+}
+
 function handleGetTweets(req, res) {
   var keyword;
   var numberOfTweets = 10;
@@ -80,11 +97,102 @@ function handleGetTweets(req, res) {
   }
 }
 
+function handleSetCollection(req, res) {
+
+  var tweetIds;
+  var collectionId;
+
+  if (typeof req.body.tweetIds !== 'undefined') {
+    tweetIds = req.body.tweetIds;
+  } else {
+    console.error('[Snapkite] Missing request data: tweetIds');
+
+    res.json({
+      error: 'Missing request data'
+    });
+
+    return;
+  }
+
+  if (typeof req.body.collectionId !== 'undefined') {
+    collectionId = req.body.collectionId;
+  } else {
+    console.error('[Snapkite] Missing request data: collectionId');
+
+    res.json({
+      error: 'Missing request data'
+    });
+
+    return;
+  }
+
+  require('./controllers/collection').set(collectionId, tweetIds, function (error, id) {
+    if (error) {
+
+      res.json({
+        'error': error
+      });
+
+      return;
+    }
+
+    res.json({
+      id: id
+    });
+  });
+
+}
+
+function handleGetCollection(req, res) {
+
+  var collectionId;
+
+  if (typeof req.params.collectionId !== 'undefined') {
+    collectionId = req.params.collectionId;
+  } else {
+    console.error('[Snapkite] Missing request data: collectionId');
+
+    res.json({
+      error: 'Missing request data'
+    });
+
+    return;
+  }
+
+  require('./controllers/collection').get(collectionId, function (error, collection) {
+    if (error) {
+
+      res.json({
+        'error': error
+      });
+
+      return;
+    }
+
+    if (!collection) {
+      res.json({});
+      return;
+    }
+
+    res.json({
+      collectionId: collection.id,
+      tweets: collection.tweets
+    });
+  });
+
+}
+
+// Tweets
+router.get('/api/1.0/tweet/:tweetId', handleGetTweet);
 router.get('/api/1.0/tweets/all', handleGetTweets);
 router.get('/api/1.0/tweets/all/:numberOfTweets', handleGetTweets);
 router.get('/api/1.0/tweets/all/:numberOfTweets/:offset', handleGetTweets);
 router.get('/api/1.0/tweets/keyword/:keyword', handleGetTweets);
 router.get('/api/1.0/tweets/keyword/:keyword/:numberOfTweets', handleGetTweets);
 router.get('/api/1.0/tweets/keyword/:keyword/:numberOfTweets/:offset', handleGetTweets);
+
+// Collection
+router.post('/api/1.0/collection/', handleSetCollection);
+router.get('/api/1.0/collection/:collectionId', handleGetCollection);
 
 app.use(router);
