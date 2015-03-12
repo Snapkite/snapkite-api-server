@@ -14,7 +14,8 @@ var tweetSchema = new mongoose.Schema({
   coordinates: {
     latitude: {type: String, required: false},
     longitude: {type: String, required: false}
-  }
+  },
+  date_updated: {type: Date, default: (new Date())}
 }, { collection: COLLECTION_NAME });
 
 module.exports = mongoose.model('Tweet', tweetSchema);
