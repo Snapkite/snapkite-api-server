@@ -99,24 +99,14 @@ function handleGetTweets(req, res) {
 
 function handleSetCollection(req, res) {
 
-  var tweetIds;
+  var tweetIds = [];
   var collectionId;
 
   if (typeof req.body.tweetIds !== 'undefined') {
     tweetIds = req.body.tweetIds;
-  } else {
-    console.error('[Snapkite] Missing request data: tweetIds');
-
-    res.json({
-      error: 'Missing request data'
-    });
-
-    return;
   }
 
-  if (typeof req.body.collectionId !== 'undefined') {
-    collectionId = req.body.collectionId;
-  } else {
+  if (typeof req.body.collectionId === 'undefined') {
     console.error('[Snapkite] Missing request data: collectionId');
 
     res.json({
@@ -125,6 +115,8 @@ function handleSetCollection(req, res) {
 
     return;
   }
+
+  collectionId = req.body.collectionId;
 
   require('./controllers/collection').set(collectionId, tweetIds, function (error, id) {
     if (error) {
